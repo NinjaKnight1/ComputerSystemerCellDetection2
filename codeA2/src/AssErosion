@@ -1,0 +1,79 @@
+LI R1, 0; //Start x for-loop
+LI R2, 0; //Start y for-loop
+
+//Processing border pixel
+SUBI R3, 0, R1;
+BNEG 7 //If x greater than 0 jump to line 7
+LI R4, 0;
+SD R4, R2; //Store 0 in the address R2
+
+BRANCH "TO END" //Jump to end of for-loop
+
+SUBI R3, 0, R2;
+BNEG 19 //If y is greater than 0 jump to line 19
+LI R4, 0; //Set R4 to 0
+LI R3, 0; //Set R3 to 0
+ADD R3, R1, 0; //Make R3 and R1 have the same value
+
+//Multiplying R1 with 20
+ADDI R3, R3, 0; //Add 0 to R3
+BZERO 17; //Check if R3 is zero, if yes jump to line 17
+ADDI R4, R4, 20; //Add 20 to R4
+SUBI R3, R3, 1; //Subtract 1 from R3
+BRANCH 12; //Go back to line 12
+
+LI R3, 0; //Set R3 to 0
+SD R3, R4; //Store 0 in the address R4
+
+BRANCH "TO END" //Jump to end of for-loop
+
+SUBI R3, R1, 19; //Subtract 19 from R1
+BNEG 24 //If x is smaller than 19 jump to line 24
+ADDI R3, R2, 380; //Make R3 equal 380 + R2
+LI R4, 0; //Set R4 to 0
+SD R4, R3; // Store 0 in the address R3
+
+BRANCH "TO END" //Jump to end of for-loop
+
+SUBI R3, R2, 19; //Subtract 19 from R2
+BNEG 37 //If y is smaller than 19 jump to line 37
+LI R4, 0; //Set R4 to 0
+LI R3, 0; //Set R3 to 0
+ADD R3, R1, 0; //Make R3 and R1 have the same value
+
+//Multiplying R1 with 20
+ADDI R3, R3, 0; //Add 0 to R3
+BZERO 34; //Check if R3 is zero, if yes jump to line 34
+ADDI R4, R4, 20; //Add 20 to R4
+SUBI R3, R3, 1; //Subtract 1 from R3
+BRANCH 29; //Go back to line 29
+
+LI R3, 0; //Set R3 to 0
+ADDI, R4, R4, 19;
+SD R3, R4; //Store 0 in the address R4
+
+BRANCH "TO END" //Jump to end of for-loop
+
+//Processing inner pixel
+
+//Multiplying R1 with 20
+ADDI R3, R3, 0; //Add 0 to R3
+BZERO 34; //Check if R3 is zero, if yes jump to line 34
+ADDI R4, R4, 20; //Add 20 to R4
+SUBI R3, R3, 1; //Subtract 1 from R3
+BRANCH 29; //Go back to line 29
+
+//Check if it is a black pixel
+ADDI R4, R4, 400;
+ADD R4, R4, R2;
+LD R3, R4; //Load the value from the address of R4 to R3
+
+SUBI 0, R3; //Subtract R3 from 0
+BNEG 79 //If R3 is greater than 0 jump to line 79
+LI R3, 0;
+SUBI R4, R4, 400;
+SD R3, R4;
+
+BRANCH "TO END" //Jump to end of for-loop
+
+//White pixel, checking neighboring pixels
