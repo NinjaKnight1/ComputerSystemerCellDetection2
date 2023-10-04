@@ -11,5 +11,15 @@ class ProgramCounter extends Module {
   })
 
   //Implement this module here (respect the provided interface, since it used by the tester)
+  val notRun = !io.run
+  val notRunOrStop = notRun || io.stop
 
+  val programCounter1 = io.programCounter + 1.U
+
+  val result1 = Mux(io.jump, programCounter1, io.programCounterJump)
+
+  val result2 = Mux(notRunOrStop, result1, io.programCounter)
+  val reg1 = RegInit(0.U(16.W))
+  reg1 := result2
+  io.programCounter := reg1
 }
