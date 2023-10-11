@@ -7,7 +7,7 @@ ADD R4, R4, R1; //Adding x to R4
 
 //Multiplying R2 with 20
 LI R3, 0; //Set R3 to 0
-ADD R3, R2, 0; //Make R3 and R2 have the same value
+ADD R3, R3, R2; //Make R3 and R2 have the same value
 
 //While-loop to multiply
 ADDI R3, R3, 0; //Add 0 to R3
@@ -83,7 +83,7 @@ LD R3, R5; //Load the value from the address of R5 to R3
 SUBI R3, R3, 0; //Subtract 0 from R3
 BZERO 88 //If R3 is 255, jump to line 88
 
-BRANCH YY //If no black neighbouring pixel is found, jump to line YY
+BRANCH 95 //If no black neighbouring pixel is found, jump to line 95
 
 //Setting output image pixel to black
 ADDI R4, R4, 400; //Changing address to output image
