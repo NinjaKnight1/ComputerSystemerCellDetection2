@@ -77,7 +77,7 @@ LD R3, R5; //Load the value from the address of R5 to R3
 SUBI R3, R3, 0; //Subtract 0 from R3
 BZERO 88 //If R3 is 255, jump to line 88
 
-//Checking right pixel
+//Checking lower pixel
 ADDI R5, R4, 20; //Setting R5 to R4 plus 20
 LD R3, R5; //Load the value from the address of R5 to R3
 SUBI R3, R3, 0; //Subtract 0 from R3
