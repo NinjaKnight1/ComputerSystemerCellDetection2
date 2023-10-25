@@ -11,6 +11,7 @@ class ALU extends Module {
     val IsZero = Output(UInt(1.W))
   })
 
+  //Implement this module here
   io.result := 0.U
 
   switch(io.sel) {
@@ -19,10 +20,9 @@ class ALU extends Module {
   }
 
   io.IsZero := 0.U
-
-  switch(io.result) {
-    is(0.U) {io.IsZero := 1.U}
+  
+  when(io.result === 0.U){
+    io.IsZero := 1.U
   }
-  //Implement this module here
 
 }
