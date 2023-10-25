@@ -50,18 +50,16 @@ class RegisterFile extends Module {
     is(7.U) { io.b := R7 }
   }
 
-  switch(io.writeEnable) {
-    is(1.U) {
-      switch(io.writeSel) {
-        is(0.U) { R0 := io.writeData }
-        is(1.U) { R1 := io.writeData }
-        is(2.U) { R2 := io.writeData }
-        is(3.U) { R3 := io.writeData }
-        is(4.U) { R4 := io.writeData }
-        is(5.U) { R5 := io.writeData }
-        is(6.U) { R6 := io.writeData }
-        is(7.U) { R7 := io.writeData }
-      }
+  when(io.writeEnable === 1.U) {
+  switch(io.writeSel) {
+    is(0.U) { R0 := io.writeData }
+    is(1.U) { R1 := io.writeData }
+    is(2.U) { R2 := io.writeData }
+    is(3.U) { R3 := io.writeData }
+    is(4.U) { R4 := io.writeData }
+    is(5.U) { R5 := io.writeData }
+    is(6.U) { R6 := io.writeData }
+    is(7.U) { R7 := io.writeData }
     }
   }
 }
