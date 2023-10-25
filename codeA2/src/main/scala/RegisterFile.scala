@@ -24,6 +24,8 @@ class RegisterFile extends Module {
   val R6 = Reg(UInt(32.W))
   val R7 = Reg(UInt(32.W))
 
+  io.a := 0.U
+
   switch(io.aSel) {
     is(0.U) { io.a := R0 }
     is(1.U) { io.a := R1 }
@@ -34,6 +36,8 @@ class RegisterFile extends Module {
     is(6.U) { io.a := R6 }
     is(7.U) { io.a := R7 }
   }
+
+  io.b := 0.U
 
   switch(io.bSel) {
     is(0.U) { io.b := R0 }
