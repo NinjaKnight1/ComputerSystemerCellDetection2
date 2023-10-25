@@ -15,14 +15,14 @@ class RegisterFile extends Module {
 
   //Implement this module here
 
-  val R0 = UInt(32.W)
-  val R1 = UInt(32.W)
-  val R2 = UInt(32.W)
-  val R3 = UInt(32.W)
-  val R4 = UInt(32.W)
-  val R5 = UInt(32.W)
-  val R6 = UInt(32.W)
-  val R7 = UInt(32.W)
+  val R0 = Reg(UInt(32.W))
+  val R1 = Reg(UInt(32.W))
+  val R2 = Reg(UInt(32.W))
+  val R3 = Reg(UInt(32.W))
+  val R4 = Reg(UInt(32.W))
+  val R5 = Reg(UInt(32.W))
+  val R6 = Reg(UInt(32.W))
+  val R7 = Reg(UInt(32.W))
 
   switch(io.aSel) {
     is(0.U) { io.a := R0 }
