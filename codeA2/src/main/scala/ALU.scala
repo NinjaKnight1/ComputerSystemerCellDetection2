@@ -6,7 +6,7 @@ class ALU extends Module {
     //Define the module interface here (inputs/outputs)
     val op1 = Input(UInt(32.W))
     val op2 = Input(UInt(32.W))
-    val sel = Input(UInt(2.W))
+    val sel = Input(UInt(1.W))
     val result = Output(UInt(32.W))
     val IsZero = Output(UInt(1.W))
   })
