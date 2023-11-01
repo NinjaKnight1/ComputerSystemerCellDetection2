@@ -68,13 +68,13 @@ class CPUTop extends Module {
 
   val finalJump = eqJump | controlUnit.io.branch
 
-  programCounter.io.branch := finalJump
+  programCounter.io.jump := finalJump
 
-  programCounter.io.END := controlUnit.io.END
+  programCounter.io.stop := controlUnit.io.END
 
   programCounter.io.run := io.run
 
-  programCounter.io.jumpAddress := programMemory.io.instructionRead(15,0)
+  programCounter.io.programCounterJump := programMemory.io.instructionRead(15,0)
   //CPU section
   io.done := controlUnit.io.END
 
