@@ -2,7 +2,7 @@ LI R1, 0; //Start x for-loop
 LI R2, 0; //Start y for-loop
 
 //Setting start address
-LI R4, 0; //Set R4 to 0
+LI R4, 0; //Set R4 to 0 //Line 3
 ADD R4, R4, R1; //Adding x to R4
 
 //Multiplying R2 with 20
@@ -10,30 +10,30 @@ LI R3, 0; //Set R3 to 0
 ADD R3, R3, R2; //Make R3 and R2 have the same value
 
 //While-loop to multiply
-ADDI R3, R3, 0; //Add 0 to R3
-BZERO 18; //Check if R3 is zero, if yes jump to line 18
+
+BEQ  R3, 0, 18;//Check if R3 is zero, if yes jump to line 18 //Line 13
 ADDI R4, R4, 20; //Add 20 to R4
 SUBI R3, R3, 1; //Subtract 1 from R3
 BRANCH 13; //Go back to line 13
 
 //Processing border pixel
-SUBI R3, R1, 0;
-BZERO 35 //If x is 0, jump to line 35
 
-SUBI R3, R2, 0;
-BZER0 35 //If y is 0, jump to line 35
+BEQ R1, 0, 35;//If x is 0, jump to line 35
 
-SUBI R3, R1, 19; //Subtract 19 from R1
-BZERO 35 //If x is 19, jump to line 35
 
-SUBI R3, R2, 19; //Subtract 19 from R2
-BZERO 35 //If y is 19, jump to line 35
+BEQ R2, 0, 35; //If y is 0, jump to line 35
+
+
+BEQ R1, 19, 35; //If x is 19, jump to line 35
+
+
+BEQ R2, 19, 35; //If y is 19, jump to line 35
 
 //If no border pixel jump to further check
 BRANCH 46 //Jump to line 46
 
 //Set border pixel in output image to black
-LI R3, 0; //Set R3 to 0
+LI R3, 0; //Set R3 to 0 //Line 35
 
 //Set output image address
 ADDI R4, R4, 400;
@@ -46,10 +46,10 @@ BRANCH 102; //Jump to end of for-loop
 //Processing inner pixel
 
 //Check if it is a black pixel
-LD R3, R4; //Load the value from the address of R4 to R3
+LD R3, R4; //Load the value from the address of R4 to R3 //Line 46
 
-SUBI R3, R3, 255; //Subtract 255 from R3
-BZERO 59 //If R3 is 255, jump to line 59
+
+BEQ R3, 255, 59; //If R3 is 255, jump to line 59
 LI R3, 0;
 ADDI R4, R4, 400;
 SD R3, R4;
@@ -57,43 +57,43 @@ SD R3, R4;
 BRANCH 102; //Jump to end of for-loop
 
 //White pixel, checking neighboring pixels
-LI R5, 0; //Setting R5 to 0
+LI R5, 0; //Setting R5 to 0 //Line 59
 
 //Checking left pixel
 SUBI R5, R4, 1; //Setting R5 to R4 minus 1
 LD R3, R5; //Load the value from the address of R5 to R3
-SUBI R3, R3, 0; //Subtract 0 from R3
-BZERO 88 //If R3 is 255, jump to line 88
+
+BEQ R3, 0, 88; //If R3 is 255, jump to line 88
 
 //Checking right pixel
 ADDI R5, R4, 1; //Setting R5 to R4 plus 1
 LD R3, R5; //Load the value from the address of R5 to R3
-SUBI R3, R3, 0; //Subtract 0 from R3
-BZERO 88 //If R3 is 255, jump to line 88
+
+BEQ R3, 0, 88; //If R3 is 255, jump to line 88
 
 //Checking upper pixel
 SUBI R5, R4, 20; //Setting R5 to R4 minus 20
 LD R3, R5; //Load the value from the address of R5 to R3
-SUBI R3, R3, 0; //Subtract 0 from R3
-BZERO 88 //If R3 is 255, jump to line 88
+
+BEQ R3, 0, 88; //If R3 is 255, jump to line 88
 
 //Checking lower pixel
 ADDI R5, R4, 20; //Setting R5 to R4 plus 20
 LD R3, R5; //Load the value from the address of R5 to R3
-SUBI R3, R3, 0; //Subtract 0 from R3
-BZERO 88 //If R3 is 255, jump to line 88
+
+BEQ R3, 0, 88; //If R3 is 255, jump to line 88
 
 BRANCH 95 //If no black neighbouring pixel is found, jump to line 95
 
 //Setting output image pixel to black
-ADDI R4, R4, 400; //Changing address to output image
+ADDI R4, R4, 400; //Changing address to output image //Line 88
 LI R3, 0; //Setting R3 to 0
 SD R3, R4; //Store 0 in the address
 
 BRANCH 102; //Jump to end of for-loop
 
 //Setting output image pixel to white
-ADDI R4, R4, 400; //Changing address to output image
+ADDI R4, R4, 400; //Changing address to output image //Line 95
 LI R3, 255; //Setting R3 to 255
 SD R3, R4; //Store 255 in the address
 
@@ -101,22 +101,22 @@ BRANCH 102; //Jump to end of for-loop
 
 //End
 //Updating y
-ADDI R2, R2, 1; //Adding 1 to y
+ADDI R2, R2, 1; //Adding 1 to y //Line 102
 
 //Checking y condition
-SUBI R3, R2, 20;
-BZERO 113; //If y is 20 jump to 113
+
+BEQ R2, 20, 113; //If y is 20 jump to 113
 
 //Restart while-loop
 BRANCH 3;
 
 //Updating x
-ADDI R1, R1, 1; //Adding 1 to x
-SUBI R3, R1, 20;
-BZERO 121; //If X is 20 jump to 121
+ADDI R1, R1, 1; //Adding 1 to x //Line 113
+
+BEQ R1, 20, 121; //If X is 20 jump to 121
 
 //Restart while-loop
 BRANCH 2;
 
 //End program
-END;
+END; //Line 121
