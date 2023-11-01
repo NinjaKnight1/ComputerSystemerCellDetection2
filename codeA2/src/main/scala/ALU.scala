@@ -8,7 +8,7 @@ class ALU extends Module {
     val op2 = Input(UInt(32.W))
     val sel = Input(UInt(1.W))
     val result = Output(UInt(32.W))
-    val IsZero = Output(UInt(1.W))
+    val isZero = Output(Bool ())
   })
 
   //Implement this module here
@@ -19,10 +19,10 @@ class ALU extends Module {
     is(1.U) {io.result := io.op1 - io.op2}
   }
 
-  io.IsZero := 0.U
+  io.isZero := 0.U
   
   when(io.result === 0.U){
-    io.IsZero := 1.U
+    io.isZero := 1.U
   }
 
 }

@@ -28,13 +28,57 @@ class CPUTop extends Module {
   val alu = Module(new ALU())
 
   //Connecting the modules
-  //programCounter.io.run := io.run
-  //programMemory.io.address := programCounter.io.programCounter
+  programCounter.io.run := io.run
+  programMemory.io.address := programCounter.io.programCounter
 
   ////////////////////////////////////////////
   //Continue here with your connections
   ////////////////////////////////////////////
+  controlUnit.io.opCode := programMemory.io.instructionRead(31,26)
 
+  //Register file section
+  registerFile.io.writeEnable := controlUnit.io.regWriteEnable
+  registerFile.io.writeSel := programMemory.io.instructionRead(25,21)
+  registerFile.io.aSel := programMemory.io.instructionRead(20,16)
+
+  val bSelResult = Mux(controlUnit.io.regChange, programMemory.io.instructionRead(25,21), programMemory.io.instructionRead(19,15))
+  registerFile.io.bSel := bSelResult
+
+  val memOrALU = Mux(controlUnit.io.fromMem, dataMemory.io.dataRead, alu.io.result)
+
+  val regIm = Mux(controlUnit.io.isIm, programMemory.io.instructionRead(15,0), memOrALU)
+  registerFile.io.writeData := regIm
+
+  //ALU section
+  alu.io.sel := controlUnit.io.ALUopr
+
+  alu.io.op1 := registerFile.io.a
+
+  val bALU = Mux(controlUnit.io.isImALU, programMemory.io.instructionRead(15,0), registerFile.io.b)
+  alu.io.op2 := bALU
+
+  //Data Memory section
+  dataMemory.io.writeEnable := controlUnit.io.memWriteEnable
+
+  dataMemory.io.address := registerFile.io.a
+  dataMemory.io.dataWrite := registerFile.io.b
+
+  //PC section
+  val eqJump = controlUnit.io.branchCond & alu.io.isZero
+
+  val finalJump = eqJump | controlUnit.io.branch
+
+  programCounter.io.branch := finalJump
+
+  programCounter.io.END := controlUnit.io.END
+
+  programCounter.io.run := io.run
+
+  programCounter.io.jumpAddress := programMemory.io.instructionRead(15,0)
+  //CPU section
+  io.done := controlUnit.io.END
+
+  
   //This signals are used by the tester for loading the program to the program memory, do not touch
   programMemory.io.testerAddress := io.testerProgMemAddress
   io.testerProgMemDataRead := programMemory.io.testerDataRead
