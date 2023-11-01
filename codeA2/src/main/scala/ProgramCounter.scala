@@ -16,7 +16,7 @@ class ProgramCounter extends Module {
 
   val programCounter1 = io.programCounter + 1.U
 
-  val result1 = Mux(io.branch,  io.programCounterJump, programCounter1)
+  val result1 = Mux(io.jump,  io.programCounterJump, programCounter1)
 
   val result2 = Mux(notRunOrStop, io.programCounter, result1)
   val reg1 = RegInit(0.U(16.W))
