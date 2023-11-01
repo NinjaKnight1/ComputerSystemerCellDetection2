@@ -2,7 +2,7 @@ LI R1, 0; //Start x for-loop
 LI R2, 0; //Start y for-loop
 
 //Setting start address
-LI R4, 0; //Set R4 to 0
+LI R4, 0; //Set R4 to 0 //Line 3
 ADD R4, R4, R1; //Adding x to R4
 
 //Multiplying R2 with 20
