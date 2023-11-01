@@ -10,24 +10,24 @@ LI R3, 0; //Set R3 to 0
 ADD R3, R3, R2; //Make R3 and R2 have the same value
 
 //While-loop to multiply
-
-BEQ  R3, 0, 18;//Check if R3 is zero, if yes jump to line 18 //Line 13
+LI R7, 0;
+BEQ  R3, R7, 18;//Check if R3 is zero, if yes jump to line 18 //Line 13
 ADDI R4, R4, 20; //Add 20 to R4
 SUBI R3, R3, 1; //Subtract 1 from R3
 BRANCH 13; //Go back to line 13
 
 //Processing border pixel
+LI R7, 0;
+BEQ R1, R7, 35;//If x is 0, jump to line 35 //Line 18
 
-BEQ R1, 0, 35;//If x is 0, jump to line 35
+LI R7, 0;
+BEQ R2, R7, 35; //If y is 0, jump to line 35
 
+LI R7, 19;
+BEQ R1, R7, 35; //If x is 19, jump to line 35
 
-BEQ R2, 0, 35; //If y is 0, jump to line 35
-
-
-BEQ R1, 19, 35; //If x is 19, jump to line 35
-
-
-BEQ R2, 19, 35; //If y is 19, jump to line 35
+LI R7, 19;
+BEQ R2, R7, 35; //If y is 19, jump to line 35
 
 //If no border pixel jump to further check
 BRANCH 46 //Jump to line 46
@@ -48,8 +48,8 @@ BRANCH 102; //Jump to end of for-loop
 //Check if it is a black pixel
 LD R3, R4; //Load the value from the address of R4 to R3 //Line 46
 
-
-BEQ R3, 255, 59; //If R3 is 255, jump to line 59
+LI R7, 255;
+BEQ R3, R7, 59; //If R3 is 255, jump to line 59
 LI R3, 0;
 ADDI R4, R4, 400;
 SD R3, R4;
@@ -62,26 +62,26 @@ LI R5, 0; //Setting R5 to 0 //Line 59
 //Checking left pixel
 SUBI R5, R4, 1; //Setting R5 to R4 minus 1
 LD R3, R5; //Load the value from the address of R5 to R3
-
-BEQ R3, 0, 88; //If R3 is 255, jump to line 88
+LI R7, 0;
+BEQ R3, R7, 88; //If R3 is 255, jump to line 88
 
 //Checking right pixel
 ADDI R5, R4, 1; //Setting R5 to R4 plus 1
 LD R3, R5; //Load the value from the address of R5 to R3
-
-BEQ R3, 0, 88; //If R3 is 255, jump to line 88
+LI R7, 0;
+BEQ R3, R7, 88; //If R3 is 255, jump to line 88
 
 //Checking upper pixel
 SUBI R5, R4, 20; //Setting R5 to R4 minus 20
 LD R3, R5; //Load the value from the address of R5 to R3
-
-BEQ R3, 0, 88; //If R3 is 255, jump to line 88
+LI R7, 0;
+BEQ R3, R7, 88; //If R3 is 255, jump to line 88
 
 //Checking lower pixel
 ADDI R5, R4, 20; //Setting R5 to R4 plus 20
 LD R3, R5; //Load the value from the address of R5 to R3
-
-BEQ R3, 0, 88; //If R3 is 255, jump to line 88
+LI R7, 0;
+BEQ R3, R7, 88; //If R3 is 255, jump to line 88
 
 BRANCH 95 //If no black neighbouring pixel is found, jump to line 95
 
@@ -104,16 +104,16 @@ BRANCH 102; //Jump to end of for-loop
 ADDI R2, R2, 1; //Adding 1 to y //Line 102
 
 //Checking y condition
-
-BEQ R2, 20, 113; //If y is 20 jump to 113
+LI R7, 20;
+BEQ R2, R7, 113; //If y is 20 jump to 113
 
 //Restart while-loop
 BRANCH 3;
 
 //Updating x
 ADDI R1, R1, 1; //Adding 1 to x //Line 113
-
-BEQ R1, 20, 121; //If X is 20 jump to 121
+LI R7, 20;
+BEQ R1, R7, 121; //If X is 20 jump to 121
 
 //Restart while-loop
 BRANCH 2;
