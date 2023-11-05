@@ -4,19 +4,19 @@ LI R4, 0; //Set R4 to 0 //Line 3
 ADD R4, R4, R1; //Adding x to R4
 LI R3, 0; //Set R3 to 0
 ADD R3, R3, R2; //Make R3 and R2 have the same value
-LI R7, 0;
-BEQ  R3, R7, 13;//Check if R3 is zero, if yes jump to line 18 //Line 13
+LI R7, 0; //Line 13
+BEQ  R3, R7, 18;//Check if R3 is zero, if yes jump to line 18
 ADDI R4, R4, 20; //Add 20 to R4
 SUBI R3, R3, 1; //Subtract 1 from R3
-BRANCH 8; //Go back to line 13
+BRANCH 13; //Go back to line 13
+LI R7, 0; //Line 18
+BEQ R1, R7, 35;//If x is 0, jump to line 35
 LI R7, 0;
-BEQ R1, R7, 21;//If x is 0, jump to line 35 //Line 18
-LI R7, 0;
-BEQ R2, R7, 21; //If y is 0, jump to line 35
+BEQ R2, R7, 35; //If y is 0, jump to line 35
 LI R7, 19;
-BEQ R1, R7, 21; //If x is 19, jump to line 35
+BEQ R1, R7, 35; //If x is 19, jump to line 35
 LI R7, 19;
-BEQ R2, R7, 21; //If y is 19, jump to line 35
+BEQ R2, R7, 35; //If y is 19, jump to line 35
 BRANCH 46 //Jump to line 46
 LI R3, 0; //Set R3 to 0 //Line 35
 ADDI R4, R4, 400;
