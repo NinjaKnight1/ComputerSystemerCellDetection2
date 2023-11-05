@@ -1,0 +1,29 @@
+
+
+
+
+// make class
+public class FromAssToBin {
+    // make method
+    public static void main(String[] args) {
+        // make scanner
+        Scanner input = new Scanner(System.in);
+        // ask for input
+        System.out.print("Enter a decimal number: ");
+        // make variable
+        int decimal = input.nextInt();
+        // make string
+        String binary = "";
+        // make loop
+        while (decimal != 0) {
+            // make variable
+            int bin = decimal % 2;
+            // make string
+            binary = bin + binary;
+            // make variable
+            decimal = decimal / 2;
+        }
+        // print
+        System.out.println("The binary value is " + binary);
+    }
+}
