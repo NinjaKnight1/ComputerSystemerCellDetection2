@@ -69,7 +69,7 @@ LD R3, R5; //Load the value from the address of R5 to R3
 LI R7, 0;
 BEQ R3, R7, 88; //If R3 is 255, jump to line 88
 
-BRANCH 95 //If no black neighbouring pixel is found, jump to line 95
+BRANCH 95; //If no black neighbouring pixel is found, jump to line 95
 
 //Setting output image pixel to black
 ADDI R4, R4, 400; //Changing address to output image //Line 88
