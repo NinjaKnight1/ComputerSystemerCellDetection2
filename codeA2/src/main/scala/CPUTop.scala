@@ -41,7 +41,7 @@ class CPUTop extends Module {
   registerFile.io.writeSel := programMemory.io.instructionRead(25,21)
   registerFile.io.aSel := programMemory.io.instructionRead(20,16)
 
-  val bSelResult = Mux(controlUnit.io.regChange, programMemory.io.instructionRead(25,21), programMemory.io.instructionRead(19,15))
+  val bSelResult = Mux(controlUnit.io.regChange, programMemory.io.instructionRead(25,21), programMemory.io.instructionRead(15,11))
   registerFile.io.bSel := bSelResult
 
   val memOrALU = Mux(controlUnit.io.fromMem, dataMemory.io.dataRead, alu.io.result)

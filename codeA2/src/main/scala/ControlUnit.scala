@@ -20,9 +20,9 @@ class ControlUnit extends Module {
   })
 
   //Implement this module here
-  val im = Cat(io.opCode(0), io.opCode(1))
-  val cat = Cat(io.opCode(2), io.opCode(3))
-  val op = Cat(io.opCode(4), io.opCode(5))
+  val im = io.opCode(5, 4)
+  val cat = io.opCode(3, 2)
+  val op = io.opCode(1,0)
 
   io.isIm := 0.U
   io.ALUopr := 0.U
@@ -106,6 +106,7 @@ class ControlUnit extends Module {
           /*If it is zero (BEQ)*/
           io.regChange := 1.U
           io.branchCond := 1.U
+          io.ALUopr := 1.U
         }
         is(3.U){
           /*End execution (END)*/

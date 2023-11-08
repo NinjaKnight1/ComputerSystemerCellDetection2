@@ -1,20 +1,6 @@
-LI R1, 0; //Start x for-loop
+LI R4, 0; //Set R4 to 0
 LI R2, 0; //Start y for-loop
-
-//Setting start address
-LI R4, 0; //Set R4 to 0 //Line 3
-ADD R4, R4, R1; //Adding x to R4
-
-//Multiplying R2 with 20
-LI R3, 0; //Set R3 to 0
-ADD R3, R3, R2; //Make R3 and R2 have the same value
-
-//While-loop to multiply
-LI R7, 0;
-BEQ  R3, R7, 18;//Check if R3 is zero, if yes jump to line 18 //Line 13
-ADDI R4, R4, 20; //Add 20 to R4
-SUBI R3, R3, 1; //Subtract 1 from R3
-BRANCH 13; //Go back to line 13
+LI R1, 0; //Start x for-loop
 
 //Processing border pixel
 LI R7, 0;
@@ -100,20 +86,21 @@ SD R3, R4; //Store 255 in the address
 BRANCH 102; //Jump to end of for-loop
 
 //End
-//Updating y
-ADDI R2, R2, 1; //Adding 1 to y //Line 102
+ADDI R4, R4, 1;
+//Updating x
+ADDI R1, R1, 1; //Adding 1 to x //Line 102
 
-//Checking y condition
+//Checking x condition
 LI R7, 20;
-BEQ R2, R7, 113; //If y is 20 jump to 113
+BEQ R1, R7, 113; //If x is 20 jump to 113
 
 //Restart while-loop
 BRANCH 3;
 
-//Updating x
-ADDI R1, R1, 1; //Adding 1 to x //Line 113
+//Updating y
+ADDI R2, R2, 1; //Adding 1 to x //Line 113
 LI R7, 20;
-BEQ R1, R7, 121; //If X is 20 jump to 121
+BEQ R2, R7, 121; //If y is 20 jump to 121
 
 //Restart while-loop
 BRANCH 2;
